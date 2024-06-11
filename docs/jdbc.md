@@ -9,6 +9,18 @@ Java Database Connectivity<br>
 - ResultSet 처리
 - 트랜잭션 관리
 - 메타데이터 접근
+
+### DriverManager
+JDBC API의 일부로 JDBC 드라이버를 관리하고 데이터베이스 연결을 설정하는 데 사용한다<br>
+DriverManager를 통해 직접 데이터베이스에 연결한다<br>
+- 드라이버 등록
+```java
+Class.forName("com.mysql.cj.jdbc.Driver");
+```
+- 데이터베이스 연결 설정
+```java
+Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydatabase", "username", "password");
+```
 ```java
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -87,6 +99,13 @@ jdbc 4.2 예제
             e.printStackTrace();
         }
     }
+```
+DriverManager는 직접 커넥션을 생성하는 방법으로 사용할 때마다 연결 정보를 입력해야 한다<br>
+따라서 반복적으로 사용하지 않고 한번만 간단히 사용할 때 주로 사용한다
+```java
+DriverManager.getConnection(URL, USERNAME, PASSWORD);
+DriverManager.getConnection(URL, USERNAME, PASSWORD);
+DriverManager.getConnection(URL, USERNAME, PASSWORD);
 ```
 
 [Back to main README](../README.md)

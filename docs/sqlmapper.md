@@ -32,7 +32,7 @@ public class SpringJDBCExample {
     }
 }
 ```
-스프링 부트를 사용한다면 `spring-boot-starter-jdbc` 의존성이 스프링 설정정보를 보고<br> `DataSourceAutoConfiguration`같은 자동 구성 클래스를 통해 `DataSource`를 설정한다<br>
+스프링 부트의 `spring-boot-starter-jdbc` 의존성이 스프링 설정정보를 보고<br> `DataSourceAutoConfiguration`같은 자동 구성 클래스를 통해 `DataSource`를 설정한다<br>
 - application.properties
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/mydatabase
