@@ -65,6 +65,24 @@ public class UserService {
     }
 }
 ```
+### DataSource
+스프링 부트는 DataSource빈을 생성하고 관리하므로 JdbcTemplate을 주입받을 때 DataSource를 넣어서 반환해준다<br>
+또는 아래처럼 명시적으로 스프링 부트의 DataSource등록을 구현할 수 있다
+```java
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import javax.sql.DataSource;
+
+@Configuration
+public class AppConfig {
+
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+}
+```
 ### Mybatis
 ```java
 import org.apache.ibatis.session.SqlSession;
@@ -139,5 +157,35 @@ public class MyBatisApplication {
     }
 }
 ```
+### DataSource 
+MyBatis도 내부적으로 DataSource를 의존한다<br>
+코드로 확인해보면 아래와 같다
+```java
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+
+import javax.sql.DataSource;
+
+@Configuration
+@MapperScan("com.example.demo.mapper")
+public class MyBatisConfig {
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+        SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource);
+        sessionFactory.setMapperLocations(
+                new PathMatchingResourcePatternResolver().getResources("classpath:mappers/*.xml")
+        );
+        return sessionFactory.getObject();
+    }
+}
+```
+SqlSessionFactory는 MyBatis 핵심 인터페이스로 SqlSessionFactoryBean을 이용하여 SqlSession을 생성하는 역할을 한다<br>
+
 
 [Back to main README](../README.md)

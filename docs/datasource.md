@@ -14,7 +14,8 @@ public interface DataSource {
 대부분의 커넥션 풀은 이미 DataSource를 구현해서 사용하고 있다<br>
 개발자는 DataSource 인터페이스를 의존하는 코드를 작성한다<br>
 
-기존 DriverManager 소스를 DataSource 로 변경하는 수고를 줄이기 위해 <br>스프링은 DriverManagerDataSource 구현 클래스를 제공한다
+기존 DriverManager 소스를 DataSource 로 변경하는 수고를 줄이기 위해 <br>스프링은 DriverManagerDataSource 구현 클래스를 제공한다<br>
+DriverManagerDataSource를 이용하면 DriverManager를 이용해서 커넥션을 생성하므로 간단한 연결에만 사용한다
 
 DataSource를 생성하면 커넥션 풀이 생성되어 다음부터는 풀에서 꺼내 사용하면 된다<br>
 이러한 이점으로 설정정보를 별도로 관리할 수 있다 -> yml 버전별 관리<br>
