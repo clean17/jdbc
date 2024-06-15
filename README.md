@@ -21,4 +21,6 @@ tcp jdcb url: `jdbc:h2:tcp://localhost/mem:testdb`<br>
 
 ## [Transaction](docs/transaction.md)
 
+## [Transaction Abstraction](docs/transactionabstraction.md)
 
+## [Transaction Synchronization](docs/transactionsync.md)

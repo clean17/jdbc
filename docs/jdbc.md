@@ -101,11 +101,34 @@ jdbc 4.2 예제
     }
 ```
 DriverManager는 직접 커넥션을 생성하는 방법으로 사용할 때마다 연결 정보를 입력해야 한다<br>
-따라서 반복적으로 사용하지 않고 한번만 간단히 사용할 때 주로 사용한다
+따라서 반복적으로 사용하지 않고 한번만 간단히 사용할 때 주로 사용한다z
 ```java
 DriverManager.getConnection(URL, USERNAME, PASSWORD);
 DriverManager.getConnection(URL, USERNAME, PASSWORD);
 DriverManager.getConnection(URL, USERNAME, PASSWORD);
 ```
+### JDBCUtils
+데이터베이스 작업 후 예외를 발생시키지 않고 리소스를 안전하게 닫도록 해준다
+```java
+import org.springframework.jdbc.support.JdbcUtils;
 
+Connection conn = null;
+PreparedStatement stmt = null;
+ResultSet rs = null;
+try {
+    conn = dataSource.getConnection();
+    stmt = conn.prepareStatement("SELECT * FROM my_table");
+    rs = stmt.executeQuery();
+    while (rs.next()) {
+        // 데이터 처리 로직
+    }
+} catch (SQLException e) {
+    // 예외 처리 로직
+} finally {
+    // 리소스 정리
+    JdbcUtils.closeResultSet(rs);
+    JdbcUtils.closeStatement(stmt);
+    JdbcUtils.closeConnection(conn);
+}
+```
 [Back to main README](../README.md)
