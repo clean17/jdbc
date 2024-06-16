@@ -26,18 +26,14 @@ public class TransactionTemplateExample {
     public void performBusinessLogic() {
         transactionTemplate.executeWithoutResult(status -> {
             try {
-                // 비즈니스 로직 실행, 예를 들어 데이터베이스 업데이트
+                // 비즈니스 로직
                 updateDatabase();
             } catch (Exception ex) {
-                // 예외 발생 시 트랜잭션 롤백 지시
+                // 언체크 예외는 자동 롤백, 체크 예외는 롤백되지 않으므로 롤백을 명시
                 status.setRollbackOnly();
-                throw ex; // 예외를 다시 throw하여 상위 로직에서 처리할 수 있도록 함
+                throw new RuntimeException(ex);
             }
         });
-    }
-
-    private void updateDatabase() {
-        // 데이터베이스 업데이트 로직 구현
     }
 }
 ```
@@ -45,7 +41,15 @@ public class TransactionTemplateExample {
 언체크 예외가 발생하면 롤백한다<br>
 
 람다 표현식에서 체크 예외(Checked Exception)를 직접 던지는 것은 Java 언어 사양에 의해 제한된다<br>
-1. 체크 예외를 런타임 예외로 던지는 방법
-
+일반적인 해결 방법은 체크 예외를 언체크 예외로 바꿔서 던진다
+```java
+    transactionTemplate.executeWithoutResult(status -> {
+        try {
+            updateDatabase();
+        } catch (CheckedException  ex) {
+            throw new RuntimeException(ex);
+        }
+    });
+```
 
 [Back to main README](../README.md)
