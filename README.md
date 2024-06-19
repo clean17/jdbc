@@ -28,3 +28,5 @@ tcp jdcb url: `jdbc:h2:tcp://localhost/mem:testdb`<br>
 ## [TransactionTemplate](docs/transactiontemplate.md)
 
 ## [Transaction AOP](docs/transactionaop.md)
+
+## [Exception](docs/exception.md)
