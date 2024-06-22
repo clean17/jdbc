@@ -30,3 +30,5 @@ tcp jdcb url: `jdbc:h2:tcp://localhost/mem:testdb`<br>
 ## [Transaction AOP](docs/transactionaop.md)
 
 ## [Exception](docs/exception.md)
+
+## [Spring Exception](docs/springexception.md)
