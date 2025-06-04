@@ -60,6 +60,9 @@ public class TestDatabaseConfig {
 ```
 `@Profile("test")` 를 사용하거나 `@TestConfiguration` 을 사용한다
 ```java
+//import static org.assertj.core.api.Assertions.assertThat;
+import org.assertj.core.api.Assertions;
+
 @SpringBootTest
 @ActiveProfiles("test")
 @Transacnional // 테스트 완료 후 자동으로 롤백
@@ -82,11 +85,45 @@ public class MyServiceTest {
 }
 
 ```
-`@RunWith(SpringRunner.class)` 어노테이션은 JUnit과 Spring TestContext Framework를 통합하여 테스트를 실행하는 데 사용<br>
-애플리케이션 컨텍스트를 캐싱하여 여러 테스트 메서드가 동일한 컨텍스트를 공유할 수 있도록 하여 테스트 속도를 향상<br>
+> @RunWith(SpringRunner.class)
 
-`@ExtendWith(SpringExtension.class)` 어노테이션은 JUnit 5를 이용하여 테스트 컨텍스트를 확장하고 트랜잭션 기능을 관리한다<br>
-최근 스프링부트에서는 명시적으로 붙일 필요는 없다
+JUnit 4 환경에서 사용<br>
+스프링 테스트 컨텍스트를 JUnit 4 테스트에 통합<br>
+애플리케이션 컨텍스트를 캐싱하여 여러 테스트 메서드가 동일한 컨텍스트를 공유할 수 있도록 하여 테스트 속도를 향상<br>
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class MyTest { ... }
+```
+
+> @ExtendWith(SpringExtension.class)
+
+JUnit 5 (Jupiter) 환경에서 사용<br>
+스프링 테스트 컨텍스트를 JUnit 5 테스트에 통합<br>
+테스트 컨텍스트를 확장하고 트랜잭션 기능을 관리<br>
+```java
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+public class MyTest { ... }
+```
+
+스프링 부트에서는 ?<br>
+대부분의 경우 `@SpringBootTest`만 붙여도 자동으로 확장이 적용됨(`@ExtendWith` 생략 가능)<br>
+
+- 서비스 로직만 테스트 할 경우
+
+```java
+@ExtendWith(SpringExtension.class)
+class MyServiceTest {
+    @Autowired
+    MyService myService;
+
+    @Test
+    void testBiz() {
+        myService.doSomething();
+    }
+}
+```
 
 ### 정리
 1. 트랜잭션 AOP는 서비스 로직을 상속한 프록시 클래스를 만든다<br>
