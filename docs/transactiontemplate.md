@@ -41,7 +41,7 @@ public class TransactionTemplateExample {
 언체크 예외가 발생하면 롤백한다<br>
 
 람다 표현식에서 체크 예외(Checked Exception)를 직접 던지는 것은 Java 언어 사양에 의해 제한된다<br>
-(자바 표준 함수형 인터페이스(`Runnable`, `Consumer<T>`, `Supplier<T>`, `Function<T, R>`)는 `thrhows Exception`이 없는 시그니처로 정의되어 있음)
+(자바 표준 함수형 인터페이스(`Runnable`, `Consumer<T>`, `Supplier<T>`, `Function<T, R>`)는 `thrhows Exception`이 없는 시그니처로 정의되어 있음)<br>
 일반적인 해결 방법은 직접 `try-catch`로 감싸 체크 예외를 언체크 예외로 바꿔서 던진다
 ```java
     transactionTemplate.executeWithoutResult(status -> {
