@@ -105,5 +105,8 @@ Spring의 트랜잭션 관리를 위한 핵심 인터페이스<br>
 ```java
 PlatformTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
 ```
+`PlatformTransactionManager`는 트랜잭션 컨텍스트를 `ThreadLocal`에 저장한다<br>
+만약 별도의 스레드에서 작업을 수행하면 컨텍스트를 공유하지 않는다<br>
+즉, 그 스레드에서 새로운 트랜잭션을 열어야 한다
 
 [Back to main README](../README.md)
