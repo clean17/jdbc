@@ -108,7 +108,7 @@ public class ExampleService {
 만약에 JDBC 기술을 사용하다가 JPA 기술로 변경하게 되면 서비스 계층의 코드도 JPA 기술을 사용하도록 수정해야 하는 상황이 발생한다<br>
 트랜잭션 기능을 추상화하여 코드 변경의 문제를 해결한다<br>
 ```java
-public interface TxManaber {
+public interface TxManager {
     bigin();
     commit();
     rollback();
