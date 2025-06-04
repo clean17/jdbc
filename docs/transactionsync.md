@@ -16,6 +16,7 @@ Spring 프레임워크 내에서 트랜잭션 관리 및 리소스 동기화를 
 
 
 이 동기화 매니저는 `ThreadLocal`을 사용하여 각 스레드별로 리소스와 트랜잭션 정보를 독립적으로 유지한다<br>
+`ThreadLocal`은 Spring Security에서 사용자 인증 정보를 전파, TransactionManager에서 트랜잭션 컨텍스트를 전파하는데 사용한다<br>
 `ThreadLocal`의 사용으로 2가지 장점이 생긴다<br>
 - 스레드 안전성
 - 데이터 격리
