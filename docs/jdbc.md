@@ -101,14 +101,17 @@ jdbc 4.2 예제
     }
 ```
 DriverManager는 직접 커넥션을 생성하는 방법으로 사용할 때마다 연결 정보를 입력해야 한다<br>
-따라서 반복적으로 사용하지 않고 한번만 간단히 사용할 때 주로 사용한다z
+따라서 반복적으로 사용하지 않고 한번만 간단히 사용할 때 주로 사용한다
 ```java
 DriverManager.getConnection(URL, USERNAME, PASSWORD);
 DriverManager.getConnection(URL, USERNAME, PASSWORD);
 DriverManager.getConnection(URL, USERNAME, PASSWORD);
 ```
 ### JDBCUtils
-데이터베이스 작업 후 예외를 발생시키지 않고 리소스를 안전하게 닫도록 해준다
+데이터베이스 작업 후 예외를 발생시키지 않고 리소스를 안전하게 닫도록 해준다<br>
+사용하게 되면 보일러 플레이트 코드를 줄인다<br>
+디버깅/로깅 등 추가 확장시 유지보수가 필요하다 (유연하지 않음)<br>
+결론은 자원 해제 패턴을 줄이고 싶을 때 사용한다
 ```java
 import org.springframework.jdbc.support.JdbcUtils;
 
